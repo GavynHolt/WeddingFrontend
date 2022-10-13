@@ -1,0 +1,23 @@
+<main>
+  <img class="title-image" height="500" src="../../assets/gavynandjacqueline.svg" alt="Gavyn and Jacqueline Logo">
+  
+  <h1>Sunday, June 11, 2023</h1>
+
+  <img class="divider-line" src="../../assets/line.svg" alt="divider">
+  
+  <section>
+    <p class="welcome-text">Join us in celebrating the life we've built together and the adventures that await.</p>
+  
+    <p class="welcome-text narrow">Guests, please enter your password for event details and to RSVP:</p>
+  
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+  
+      <input type="text" formControlName="username" />
+  
+      <input type="password" formControlName="password" />
+  
+      <button type="submit">Submit</button>
+  
+    </form>
+  </section>
+</main>
