@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-map',
@@ -25,7 +26,7 @@ export class MapComponent implements OnInit {
   constructor(private httpClient: HttpClient) {
     this.apiLoaded$ = this.httpClient
       .jsonp(
-        'https://maps.googleapis.com/maps/api/js?key=AIzaSyBo8KPSlJ465Vvx5N5ZXQvrBc5tVuowz4I',
+        `https://maps.googleapis.com/maps/api/js?key=${environment.googleMapsApi}`,
         'callback'
       )
       .pipe(
