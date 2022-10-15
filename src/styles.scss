@@ -1,6 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("@picocss/pico/css/pico.min.css");
 
+// Pico CSS overrides
+[data-theme=light],
+:root:not([data-theme=dark]) {
+  --color: black;
+}
+
 body { 
   margin: 0;
   background-color: #E7EBEA;
@@ -31,6 +37,7 @@ p {
   font-size: 16px;
   font-family: 'Lexend', sans-serif;
   margin: 0.5rem 0;
+
 }
 
 .welcome-text {
