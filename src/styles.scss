@@ -9,9 +9,12 @@ body {
 
 main { 
   max-width: 1200px;
-  width: 80%;
   margin: 0 auto;
   padding: 40px 0;
+  width: 80%;
+  @media (max-width: 800px) {
+    width: 90%;
+  }
 }
 
 .welcome-date {
@@ -80,7 +83,7 @@ section {
     }
   }
 
-  button {
+  button[type="submit"] {
     max-width: 120px;
     border-radius: 999px;
     background-color: black;
@@ -89,12 +92,17 @@ section {
     padding-top: 4px;
     padding-bottom: 8px;
     margin-bottom: 0;
+    font-weight: 600;
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
     &:focus,
     &:hover {
       background-color: #BC9D51;
     }
   }
 }
+
+
 
 .guests {
   margin: 40px auto;
@@ -108,18 +116,92 @@ section {
     font-weight: bold;
     font-style: italic;
     margin-bottom: 0;
+    @media (max-width: 800px) {
+      font-size: 75px;
+    }
+    @media (max-width: 480px) {
+      font-size: 40px;
+      line-height: 40px;
+    }
   }
 }
 
-.rsvp-text {
+.rsvp-text,
+.registry-text {
   text-align: center;
-  max-width: 490px;
-  margin: 40px auto;
+  margin: 1rem auto;
+  &.narrow {
+    max-width: 390px; 
+  }
   &.bold {
     font-weight: bold;
   }
 }
 
-.form-rsvp {
-  
+.map {
+  display: block;
+  max-width: 800px;
+  margin: 0 auto;
 }
+
+.rsvp-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .notes-textarea {
+    max-width: 300px;
+    height: 120px;
+    border: 2px solid black;
+    border-radius: 0;
+    background-color: white;
+    padding-top: 4px;
+    padding-bottom: 8px;;
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    &:focus,
+    &:hover {
+      --box-shadow: none;
+      border: 2px solid #BC9D51;
+    }
+  }
+
+  button[type="submit"] {
+    max-width: 120px;
+    border-radius: 999px;
+    background-color: black;
+    border: none;
+    height: 50px;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    &:focus,
+    &:hover {
+      background-color: #BC9D51;
+    }
+  }
+}
+
+.thank-you-text {
+  text-align: center;
+  font-family: tenez, 'Georgia', serif;
+  font-weight: bold;
+  font-style: italic;
+  color: #175038;
+  font-size: 60px;
+  margin-bottom: 0;
+  @media (max-width: 480px) {
+    font-size: 40px;
+  }
+}
+
+.flourish {
+  max-width: 80px;
+  margin: 24px auto;
+}
+

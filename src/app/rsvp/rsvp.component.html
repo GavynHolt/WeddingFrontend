@@ -8,31 +8,34 @@
   <img class="divider-line" src="../../assets/line.svg" alt="divider">
   
   <section>
-    <p class="rsvp-text">Please join us at 2 PM for our backyard ceremony at 42 Dayton Ave.</p>
+    <p class="rsvp-text narrow">Please join us at 2 PM for our backyard ceremony at 42 Dayton Ave.</p>
   
-    <p class="rsvp-text">Followed by a reception at 5 PM down the street at Posticino (755 The Queensway).</p>
+    <p class="rsvp-text narrow">Followed by a reception at 5 PM down the street at Posticino (755 The Queensway).</p>
   </section>
 
   <img class="divider-line" src="../../assets/line-flipped.svg" alt="divider">
 
-  <!-- TODO put map here -->
+  <app-map class="map"></app-map>
 
   <img class="divider-line" src="../../assets/line.svg" alt="divider">
 
-  <section>
+  <form class="rsvp-form" [formGroup]="rsvpForm">
     <p class="rsvp-text bold">Please fill out the form below to RSVP for each guest.</p>
   
     <p class="rsvp-text bold">Any special accomodations to note?</p>
 
     <p class="rsvp-text">Dietary restrictions, allergies, etc...</p>
 
-  </section>
+    <textarea formControlName="notes" class="notes-textarea"></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
 
   <img class="divider-line" src="../../assets/line-flipped.svg" alt="divider">
 
-  <h2>Thank you!</h2>
+  <h2 class="thank-you-text">Thank you!</h2>
 
-  <img src="../../assets/flourish.svg" alt="">
+  <img class="flourish" src="../../assets/flourish.svg" alt="flourish decoration">
 
-  <p>For gift ideas, please check out our registry.</p>
+  <p class="registry-text">For gift ideas, please check out <a target="_blank" href="https://www.google.com">our registry</a>.</p>
 </main>
