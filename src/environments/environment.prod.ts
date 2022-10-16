@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:8080',
+  apiUrl: 'https://gj-wedding-rsvp.herokuapp.com',
   googleMapsApi: 'AIzaSyDSzMXqEeexpopRHdtU9L9gpr8LWQQ55J4',
 };
