@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { catchError } from 'rxjs';
+import { LoginErrorComponent } from '../login-error/login-error.component';
+import { WeddingService } from '../service/wedding.service';
 
 @Component({
   selector: 'app-welcome',
@@ -14,11 +18,12 @@ export class WelcomeComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private dialog: MatDialog,
+    private weddingService: WeddingService,
   ) { 
 
     this.loginForm = this.fb.group({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      userCode: new FormControl<string>('', Validators.required),
     })
   }
 
@@ -26,8 +31,18 @@ export class WelcomeComponent implements OnInit {
 
   }
 
-  login() {
-    this.router.navigate(['rsvp']);
-  }
+  login(): void {
+    const userCode: string = this.loginForm.controls["userCode"].value as string;
 
+    this.weddingService.login(userCode).pipe(
+      catchError((err) => {
+        this.dialog.open(LoginErrorComponent, {
+          width: '400px',
+        });
+        throw err;
+      }),
+    ).subscribe(() => {
+      this.router.navigate(['rsvp']);
+    });
+  }
 }

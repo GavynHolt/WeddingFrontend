@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guard/auth.guard';
 import { RsvpComponent } from './rsvp/rsvp.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
@@ -11,6 +12,7 @@ const routes: Routes = [
   {
     path: 'rsvp',
     component: RsvpComponent,
+    canActivate: [AuthGuard],
   }
 ];
 
