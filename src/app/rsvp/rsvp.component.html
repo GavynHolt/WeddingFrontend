@@ -1,8 +1,8 @@
 <main>
   <div class="guests">
-    <p>Jason Wong</p>
-    <p>Laura Chen</p>
-    <p>Reginald Wong</p>
+    <p *ngFor="let guest of guests$ | async">
+      {{ guest.firstName }} {{ guest.lastName }}
+    </p>
   </div>
 
   <img class="divider-line" src="../../assets/line.svg" alt="divider">
@@ -21,6 +21,32 @@
 
   <form class="rsvp-form" [formGroup]="rsvpForm">
     <p class="rsvp-text bold">Please fill out the form below to RSVP for each guest.</p>
+
+    <div formArrayName="guests">
+      <div *ngFor="let guest of rsvpFormGuests">
+        <p>{{ guest.get('firstName')?.value }} {{ guest.get('lastName')?.value }}</p> 
+
+          <label for="rsvp-yes">
+            <input type="radio" id="rsvp-yes" [value]="true" name="rsvp" formControlName="rsvp" />
+            Yes, I'll be there.
+          </label>
+          <div class="rsvp-details">
+            <label for="rsvp-ceremony">
+              <input type="checkbox" id="rsvp-ceremony" name="rsvp-yes-details">
+              at the ceremony
+            </label>
+            <label for="rsvp-reception">
+              <input type="checkbox" id="rsvp-reception" name="rsvp-yes-details">
+              at the reception
+            </label>
+          </div>
+          <label for="rsvp-no">
+            <input type="radio" id="rsvp-no" [value]="false" name="rsvp" formControlName="rsvp" />
+            Sorry, can't make it.
+          </label>
+      </div>
+    </div>
+
   
     <p class="rsvp-text bold">Any special accomodations to note?</p>
 
