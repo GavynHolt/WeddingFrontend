@@ -34,15 +34,18 @@ export class WelcomeComponent implements OnInit {
   login(): void {
     const userCode: string = this.loginForm.controls["userCode"].value as string;
 
-    this.weddingService.login(userCode).pipe(
-      catchError((err) => {
-        this.dialog.open(LoginErrorComponent, {
-          width: '400px',
-        });
-        throw err;
-      }),
-    ).subscribe(() => {
-      this.router.navigate(['rsvp']);
-    });
+    this.weddingService
+      .getInvitationByUserCode(userCode)
+      .pipe(
+        catchError((err) => {
+          this.dialog.open(LoginErrorComponent, {
+            width: '400px',
+          });
+          throw err;
+        })
+      )
+      .subscribe(() => {
+        this.router.navigate(['rsvp']);
+      });
   }
 }

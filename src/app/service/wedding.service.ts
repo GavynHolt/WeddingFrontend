@@ -14,19 +14,23 @@ export class WeddingService {
     this.authToken$ = new BehaviorSubject<string | undefined>(undefined);
   }
   
-  login(userCode: string): Observable<string> {
+  getInvitationByUserCode(userCode: string): Observable<string> {
+    const username = userCode.split(":")?.[0];
+
     const headers = new HttpHeaders({
       Authorization: `Basic ${btoa(userCode)}`,
     });
 
-    return this.http.get(`${environment.apiUrl}/test`, {
-      headers,
-      responseType: 'text',
-    }).pipe(
-      tap(() => {
-        this.authToken$.next(userCode);
+    return this.http
+      .get(`${environment.apiUrl}/${username}`, {
+        headers,
+        responseType: 'text',
       })
-    );
+      .pipe(
+        tap(() => {
+          this.authToken$.next(userCode);
+        })
+      );
   }
 
 }
