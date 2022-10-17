@@ -10,11 +10,11 @@ import { Invitation } from '../models/models';
 export class WeddingService {
 
   authToken$: BehaviorSubject<string | undefined>;
-  invitations$: BehaviorSubject<Invitation[] | undefined>;
+  invitations$: BehaviorSubject<Invitation | undefined>;
 
   constructor(private http: HttpClient) { 
     this.authToken$ = new BehaviorSubject<string | undefined>(undefined);
-    this.invitations$ = new BehaviorSubject<Invitation[] | undefined>(undefined);
+    this.invitations$ = new BehaviorSubject<Invitation | undefined>(undefined);
   }
   
   getInvitationByUserCode(userCode: string): Observable<Invitation[]> {
@@ -31,7 +31,7 @@ export class WeddingService {
       .pipe(
         tap((res) => {
           this.authToken$.next(userCode);
-          this.invitations$.next(res);
+          this.invitations$.next(res?.[0]);
         })
       );
   }

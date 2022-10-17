@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -17,6 +17,8 @@ export class MapComponent implements OnInit {
     lat: 43.62592,
     lng: -79.50358,
   };
+  ceremonyMarkerIcon!: google.maps.Icon;
+  receptionMarkerIcon!: google.maps.Icon;
   mapOptions: google.maps.MapOptions = {
     mapId: '4d1b8026e200cc76',
     zoom: 17,
@@ -30,6 +32,20 @@ export class MapComponent implements OnInit {
         'callback'
       )
       .pipe(
+        tap(() => {
+          this.ceremonyMarkerIcon = {
+            url: '/assets/reception.svg',
+            size: new google.maps.Size(50, 50),
+            scaledSize: new google.maps.Size(50, 50),
+            anchor: new google.maps.Point(30, 30),
+          };
+          this.receptionMarkerIcon = {
+            url: '/assets/ceremony.svg',
+            size: new google.maps.Size(50, 50),
+            scaledSize: new google.maps.Size(50, 50),
+            anchor: new google.maps.Point(30, 30),
+          };
+        }),
         map(() => true),
         catchError(() => of(false))
       );

@@ -1,3 +1,35 @@
+.guest-container {
+  display: flex;
+  width: 100%;
+  max-width: 450px;
+  margin: 16px 0;
+  padding: 8px 0;
+  @media (max-width: 480px) {
+    display: unset;
+    width: auto;
+    max-width: 300px;
+    margin-right: auto;
+    margin-left: auto;
+  } 
+  .name-container {
+    flex: 1 1 150px;
+    p {
+      font-weight: bold;
+      margin: 0;
+      @media (max-width: 480px) {
+        margin: 1rem 0;
+      }
+    }
+  }
+  .rsvp-container {
+    flex: 1 1 300px;
+  }
+  label {
+    font-size: 16px;
+
+  }
+}
+
 .radio-group {
   display: flex;
   flex-direction: column;

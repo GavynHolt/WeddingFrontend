@@ -22,30 +22,34 @@
   <form class="rsvp-form" [formGroup]="rsvpForm">
     <p class="rsvp-text bold">Please fill out the form below to RSVP for each guest.</p>
 
-    <div formArrayName="guests">
-      <div *ngFor="let guest of rsvpFormGuests">
-        <p>{{ guest.get('firstName')?.value }} {{ guest.get('lastName')?.value }}</p> 
+    <ng-container formArrayName="guests">
+      <div *ngFor="let guest of rsvpFormGuests; let i = index" [formGroupName]="i" class="guest-container" >
+        <div class="name-container">
+          <p>{{ guest.get('firstName')?.value }} {{ guest.get('lastName')?.value }}</p> 
+        </div>
 
+        <div class="rsvp-container">
           <label for="rsvp-yes">
-            <input type="radio" id="rsvp-yes" [value]="true" name="rsvp" formControlName="rsvp" />
+            <input type="radio" id="rsvp-yes" [value]="true" formControlName="rsvp" />
             Yes, I'll be there.
           </label>
           <div class="rsvp-details">
             <label for="rsvp-ceremony">
-              <input type="checkbox" id="rsvp-ceremony" name="rsvp-yes-details">
+              <input type="checkbox" id="rsvp-ceremony" name="rsvp-yes-details" formControlName="rsvpCeremony">
               at the ceremony
             </label>
             <label for="rsvp-reception">
-              <input type="checkbox" id="rsvp-reception" name="rsvp-yes-details">
+              <input type="checkbox" id="rsvp-reception" name="rsvp-yes-details" formControlName="rsvpReception">
               at the reception
             </label>
           </div>
           <label for="rsvp-no">
-            <input type="radio" id="rsvp-no" [value]="false" name="rsvp" formControlName="rsvp" />
+            <input type="radio" id="rsvp-no" [value]="false" formControlName="rsvp" />
             Sorry, can't make it.
           </label>
+        </div>
       </div>
-    </div>
+    </ng-container>
 
   
     <p class="rsvp-text bold">Any special accomodations to note?</p>
@@ -54,7 +58,7 @@
 
     <textarea formControlName="notes" class="notes-textarea"></textarea>
 
-    <button type="submit">Submit</button>
+    <button type="submit" [disabled]="!rsvpForm.valid">Submit</button>
   </form>
 
   <img class="divider-line" src="../../assets/line-flipped.svg" alt="divider">
