@@ -9,30 +9,23 @@ import { Invitation } from '../models/models';
 })
 export class WeddingService {
 
-  authToken$: BehaviorSubject<string | undefined>;
+  userCode$: BehaviorSubject<string | undefined>;
   invitations$: BehaviorSubject<Invitation | undefined>;
 
   constructor(private http: HttpClient) { 
-    this.authToken$ = new BehaviorSubject<string | undefined>(undefined);
+    this.userCode$ = new BehaviorSubject<string | undefined>(undefined);
     this.invitations$ = new BehaviorSubject<Invitation | undefined>(undefined);
   }
   
-  getInvitationByUserCode(userCode: string): Observable<Invitation[]> {
+  getInvitationByUserCode(userCode: string): Observable<Invitation> {
     const username = userCode.split(":")?.[0];
 
-    const headers = new HttpHeaders({
-      Authorization: `Basic ${btoa(userCode)}`,
-    });
-
     return this.http
-      .get<Invitation[]>(`${environment.apiUrl}/${username}`, {
-        headers,
-      })
-      .pipe(
+      .get<Invitation>(`${environment.apiUrl}/invitations/${username}`).pipe(
         tap((res) => {
-          this.authToken$.next(userCode);
-          this.invitations$.next(res?.[0]);
-        })
+          this.userCode$.next(userCode);
+          this.invitations$.next(res);
+        }),
       );
   }
 
