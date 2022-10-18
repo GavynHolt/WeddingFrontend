@@ -58,7 +58,14 @@
 
     <textarea formControlName="notes" class="notes-textarea"></textarea>
 
-    <button type="submit" [disabled]="!rsvpForm.valid">Submit</button>
+    <button type="submit" [disabled]="rsvpForm.invalid || (rsvpSubmitLoading$ | async)">
+        <mat-spinner
+          *ngIf="rsvpSubmitLoading$ | async; else loginLoaded"
+          diameter="24"
+          class="loading-spinner"
+        ></mat-spinner>
+        <ng-template #loginLoaded>Submit</ng-template>
+    </button>
   </form>
 
   <img class="divider-line" src="../../assets/line-flipped.svg" alt="divider">
