@@ -14,7 +14,14 @@
   
       <input class="welcome-input" type="text" formControlName="userCode" />
 
-      <button type="submit">Submit</button>
+      <button type="submit" [disabled]="loginForm.invalid || (loginLoading$ | async)">
+        <mat-spinner
+          *ngIf="loginLoading$ | async; else loginLoaded"
+          diameter="24"
+          class="loading-spinner"
+        ></mat-spinner>
+        <ng-template #loginLoaded>Submit</ng-template>
+      </button>
   
     </form>
   </section>

@@ -9,6 +9,7 @@ export interface Guest {
 
 export interface Invitation {
   id: number;
+  userCode: string;
   guests: Guest[];
   notes: string;
 };

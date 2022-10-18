@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { combineLatest, filter, map, Observable } from 'rxjs';
-import { Guest } from '../models/models';
+import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, catchError, combineLatest, filter, map, Observable } from 'rxjs';
+import { Guest, Invitation } from '../models/models';
 import { WeddingService } from '../service/wedding.service';
+import { RsvpErrorComponent } from './rsvp-error/rsvp-error.component';
 
 @Component({
   selector: 'app-rsvp',
@@ -12,10 +14,13 @@ import { WeddingService } from '../service/wedding.service';
 export class RsvpComponent implements OnInit {
   rsvpForm: FormGroup;
   guests$: Observable<Guest[]>;
+  rsvpSubmitLoading = new BehaviorSubject<boolean>(false);
+  rsvpSubmitLoading$ = this.rsvpSubmitLoading.asObservable();
 
   constructor(
     private fb: FormBuilder,
-    weddingService: WeddingService,
+    private weddingService: WeddingService,
+    private dialog: MatDialog,
   ) {
     this.rsvpForm = this.fb.group({
       guests: this.fb.array([]),
@@ -31,7 +36,10 @@ export class RsvpComponent implements OnInit {
       filter((invitations) => invitations !== undefined),
     ).subscribe((invitation) => {
       this.rsvpForm = this.fb.group({
+        id: invitation!.id,
+        userCode: invitation!.userCode,
         guests: this.fb.array(invitation!.guests.map((guest) =>this.fb.group({
+              id: guest.id,
               firstName: new FormControl<string>(guest.firstName || '', Validators.required),
               lastName: new FormControl<string>(guest.lastName || '', Validators.required),
               rsvp: new FormControl<boolean>(guest.rsvp, Validators.required),
@@ -69,6 +77,23 @@ export class RsvpComponent implements OnInit {
           guestForm.controls['rsvp'].setErrors(null);
         }
       });
+    });
+  }
+
+  submitRsvp() {
+    this.rsvpSubmitLoading.next(true);
+    const invitationToUpdate: Invitation = this.rsvpForm.value;
+    console.log(invitationToUpdate);
+    this.weddingService.updateInvitationRsvps(invitationToUpdate).pipe(
+      catchError((err) => {
+        this.dialog.open(RsvpErrorComponent, {
+          width: '400px',
+        });
+        this.rsvpSubmitLoading.next(false);
+        throw err;
+      })
+    ).subscribe(() => {
+        this.rsvpSubmitLoading.next(false);
     });
   }
 

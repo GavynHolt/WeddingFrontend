@@ -29,4 +29,13 @@ export class WeddingService {
       );
   }
 
+  updateInvitationRsvps(invitationToUpdate: Invitation): Observable<Invitation> {
+    return this.http.put<Invitation>(`${environment.apiUrl}/invitations`, invitationToUpdate).pipe(
+      tap((res) => {
+        console.log('result', res);
+        this.invitations$.next(res);
+      }),
+    );
+  }
+
 }

@@ -7,6 +7,7 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -17,10 +18,11 @@ import { LoginErrorComponent } from './login-error/login-error.component';
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    WelcomeComponent, 
-    RsvpComponent, 
-    MapComponent, LoginErrorComponent,
+    AppComponent,
+    WelcomeComponent,
+    RsvpComponent,
+    MapComponent,
+    LoginErrorComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { LoginErrorComponent } from './login-error/login-error.component';
     HttpClientModule,
     HttpClientJsonpModule,
     MatDialogModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

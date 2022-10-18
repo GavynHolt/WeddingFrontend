@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { catchError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
 import { LoginErrorComponent } from '../login-error/login-error.component';
 import { WeddingService } from '../service/wedding.service';
 
@@ -14,6 +14,8 @@ import { WeddingService } from '../service/wedding.service';
 export class WelcomeComponent implements OnInit {
 
   loginForm: FormGroup
+  loginLoading = new BehaviorSubject<boolean>(false);
+  loginLoading$: Observable<boolean> = this.loginLoading.asObservable();
 
   constructor(
     private fb: FormBuilder,
@@ -24,7 +26,7 @@ export class WelcomeComponent implements OnInit {
 
     this.loginForm = this.fb.group({
       userCode: new FormControl<string>('', Validators.required),
-    })
+    });
   }
 
   ngOnInit(): void {
@@ -33,6 +35,7 @@ export class WelcomeComponent implements OnInit {
 
   login(): void {
     const userCode: string = this.loginForm.controls["userCode"].value as string;
+    this.loginLoading.next(true);
 
     this.weddingService
       .getInvitationByUserCode(userCode)
@@ -41,10 +44,12 @@ export class WelcomeComponent implements OnInit {
           this.dialog.open(LoginErrorComponent, {
             width: '400px',
           });
+          this.loginLoading.next(false);
           throw err;
         })
       )
       .subscribe(() => {
+        this.loginLoading.next(false);
         this.router.navigate(['rsvp']);
       });
   }
