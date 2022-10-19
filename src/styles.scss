@@ -1,6 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("@angular/material/prebuilt-themes/deeppurple-amber.css");
-
 @import url("@picocss/pico/css/pico.min.css");
 
 // Pico CSS overrides
@@ -99,7 +97,7 @@ section {
   button[type="submit"] {
     max-width: 100px;
     border-radius: 999px;
-    background-color: black;
+    background-color: #175038;
     border: none;
     height: 40px;
     padding-top: 6px;
@@ -158,45 +156,10 @@ section {
   margin: 0 auto;
 }
 
-.rsvp-form {
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 
-  .notes-textarea {
-    max-width: 300px;
-    height: 120px;
-    border: 2px solid black;
-    border-radius: 0;
-    background-color: white;
-    font-family: 'Lexend', sans-serif;
-    font-size: 16px;
-    &:focus,
-    &:hover {
-      --box-shadow: none;
-      border: 2px solid #BC9D51;
-    }
-  }
-
-  button[type="submit"] {
-    max-width: 100px;
-    border-radius: 999px;
-    background-color: black;
-    border: none;
-    height: 40px;
-    padding-top: 6px;
-    padding-bottom: 8px;
-    margin-bottom: 0;
-    font-weight: 500;
-    font-family: 'Lexend', sans-serif;
-    font-size: 14px;
-    &:focus,
-    &:hover {
-      background-color: #BC9D51;
-    }
-  }
+:where(button[type="submit"])[disabled] {
+  opacity: 1;
+  background-color: #95A9A4 !important;
 }
 
 .thank-you-text {

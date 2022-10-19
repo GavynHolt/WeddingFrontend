@@ -1,0 +1,104 @@
+/* stylelint-disable color-function-notation */
+// Custom Theming for Angular Material
+@use '@angular/material' as mat;
+
+// For more information: https://material.angular.io/guide/theming
+
+// Plus imports for other components in your app.
+
+// If any typography overrides are needed, put them here
+// Material Typography ref: https://material.angular.io/guide/typography
+$my-custom-typography-config: mat.define-typography-config();
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core($my-custom-typography-config);
+
+$wedding-primary: (
+  50: #e1f3ee,
+  100: #b7e0d5,
+  200: #89cdba,
+  300: #5eb99f,
+  400: #42a98c,
+  500: #31997a,
+  600: #2d8c6e,
+  700: #277c60,
+  800: #216c52,
+  900: #175038,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  ),
+);
+
+
+$wedding-secondary: (
+  50: #fffbea,
+  100: #fff3cb,
+  200: #ffedaa,
+  300: #fee68c,
+  400: #fbdf76,
+  500: #f9da63,
+  600: #e8c95d,
+  700: #d2b456,
+  800: #bc9e51,
+  900: #967a48,
+  A100: #fff3cb,
+  A200: #f9da63,
+  A400: #bc9e51,
+  A700: #967a48,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: rgba(black, 0.87),
+    400: rgba(black, 0.87),
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: rgba(black, 0.87),
+    A200: white,
+    A400: white,
+    A700: white,
+  ),
+);
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$app-primary: mat.define-palette($wedding-primary, 300);
+
+// Default is A200, A100, A400
+/* stylelint-disable-next-line value-keyword-case */
+$app-accent: mat.define-palette($wedding-secondary, A400, A200, A700);
+
+// The warn palette is optional (defaults to red).
+$app-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $app-primary,
+      accent: $app-accent,
+      warn: $app-warn,
+    ),
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($app-theme);

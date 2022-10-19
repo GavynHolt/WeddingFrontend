@@ -9,12 +9,22 @@ import { Invitation } from '../models/models';
 })
 export class WeddingService {
 
-  userCode$: BehaviorSubject<string | undefined>;
+  userCode$: BehaviorSubject<string>;
   invitations$: BehaviorSubject<Invitation | undefined>;
 
   constructor(private http: HttpClient) { 
-    this.userCode$ = new BehaviorSubject<string | undefined>(undefined);
-    this.invitations$ = new BehaviorSubject<Invitation | undefined>(undefined);
+    
+    this.userCode$ = new BehaviorSubject<string>(sessionStorage.getItem("userCode") ?? '');
+    const invitationFromStorage = sessionStorage.getItem('invitation');
+    this.invitations$ = new BehaviorSubject<Invitation | undefined>(invitationFromStorage !== null ? JSON.parse(invitationFromStorage) : undefined);
+
+    this.invitations$.asObservable().subscribe((invitation) => {
+      sessionStorage.setItem("invitation", JSON.stringify(invitation));
+    });
+
+    this.userCode$.asObservable().subscribe((userCode) => {
+      sessionStorage.setItem("userCode", userCode);
+    });
   }
   
   getInvitationByUserCode(userCode: string): Observable<Invitation> {
@@ -32,10 +42,12 @@ export class WeddingService {
   updateInvitationRsvps(invitationToUpdate: Invitation): Observable<Invitation> {
     return this.http.put<Invitation>(`${environment.apiUrl}/invitations`, invitationToUpdate).pipe(
       tap((res) => {
-        console.log('result', res);
         this.invitations$.next(res);
       }),
     );
   }
 
+  clearStorage(): void {
+    sessionStorage.clear();
+  }
 }

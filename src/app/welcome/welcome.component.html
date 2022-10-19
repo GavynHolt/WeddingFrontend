@@ -19,6 +19,7 @@
           *ngIf="loginLoading$ | async; else loginLoaded"
           diameter="24"
           class="loading-spinner"
+          color="accent"
         ></mat-spinner>
         <ng-template #loginLoaded>Submit</ng-template>
       </button>

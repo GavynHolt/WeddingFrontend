@@ -1,7 +1,48 @@
+.rsvp-form {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .notes-textarea {
+    max-width: 400px;
+    height: 120px;
+    border: 2px solid black;
+    border-radius: 0;
+    background-color: white;
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    &:focus,
+    &:hover {
+      --box-shadow: none;
+      border: 2px solid #BC9D51;
+    }
+  }
+
+  button[type="submit"] {
+    max-width: 100px;
+    border-radius: 999px;
+    background-color: #175038;
+    border: none;
+    height: 40px;
+    padding-top: 6px;
+    padding-bottom: 8px;
+    margin-bottom: 0;
+    font-weight: 500;
+    font-family: 'Lexend', sans-serif;
+    font-size: 14px;
+    &:focus,
+    &:hover {
+      background-color: #BC9D51;
+    }
+  }
+}
+
 .guest-container {
   display: flex;
   width: 100%;
-  max-width: 450px;
+  max-width: 400px;
   margin: 16px 0;
   padding: 8px 0;
   @media (max-width: 480px) {
@@ -22,7 +63,7 @@
     }
   }
   .rsvp-container {
-    flex: 1 1 300px;
+    flex: 1 1 200px;
   }
   label {
     font-size: 16px;

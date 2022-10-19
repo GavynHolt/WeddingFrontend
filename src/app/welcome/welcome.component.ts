@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, Observable, of } from 'rxjs';
+import { BehaviorSubject, catchError, delay, Observable, of } from 'rxjs';
 import { LoginErrorComponent } from '../login-error/login-error.component';
 import { WeddingService } from '../service/wedding.service';
 
@@ -23,6 +23,7 @@ export class WelcomeComponent implements OnInit {
     private dialog: MatDialog,
     private weddingService: WeddingService,
   ) { 
+    weddingService.clearStorage();
 
     this.loginForm = this.fb.group({
       userCode: new FormControl<string>('', Validators.required),
@@ -40,6 +41,7 @@ export class WelcomeComponent implements OnInit {
     this.weddingService
       .getInvitationByUserCode(userCode)
       .pipe(
+        delay(5000),
         catchError((err) => {
           this.dialog.open(LoginErrorComponent, {
             width: '400px',
