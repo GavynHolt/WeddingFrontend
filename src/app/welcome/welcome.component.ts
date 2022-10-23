@@ -35,19 +35,12 @@ export class WelcomeComponent implements OnInit {
   }
 
   login(): void {
-    const userCode: string = this.loginForm.controls["userCode"].value as string;
+    const userCode: string = (this.loginForm.controls["userCode"].value as string).toLowerCase();
     this.loginLoading.next(true);
 
     this.weddingService
       .getInvitationByUserCode(userCode)
       .pipe(
-        // catchError((err) => {
-        //   this.dialog.open(LoginErrorComponent, {
-        //     width: '400px',
-        //   });
-        //   this.loginLoading.next(false);
-        //   throw err;
-        // })
         catchError((err) => {
           this.loginLoading.next(false);
           throw err;
