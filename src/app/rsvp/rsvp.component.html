@@ -20,7 +20,7 @@
   <img class="divider-line" src="../../assets/line.svg" alt="divider">
 
   <form class="rsvp-form" [formGroup]="rsvpForm" (ngSubmit)="submitRsvp()" *ngIf="(rsvpAlreadySubmitted$ | async) === false || (editRsvp$ | async); else submitted">
-    <p class="rsvp-text bold">Please fill out the form below to RSVP for each guest.</p>
+    <p class="rsvp-text bold">Please fill out the form below to RSVP for each guest by February 1, 2023.</p>
 
     <ng-container formArrayName="guests">
       <div *ngFor="let guest of rsvpFormGuests; let i = index" [formGroupName]="i" class="guest-container" >
