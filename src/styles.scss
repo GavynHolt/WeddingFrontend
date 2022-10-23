@@ -148,6 +148,9 @@ section {
   &.bold {
     font-weight: bold;
   }
+  &.no-margin {
+    margin: 0;
+  }
 }
 
 .map {
@@ -170,6 +173,7 @@ section {
   color: #175038;
   font-size: 60px;
   margin-bottom: 0;
+  margin-top: 24px;
   @media (max-width: 480px) {
     font-size: 40px;
   }
@@ -178,5 +182,15 @@ section {
 .flourish {
   max-width: 80px;
   margin: 24px auto;
+}
+
+a {
+  color:#175038;
+  text-decoration: underline;
+  &:hover,
+  &:focus {
+    color: black;
+    text-decoration: none;
+  }
 }
 

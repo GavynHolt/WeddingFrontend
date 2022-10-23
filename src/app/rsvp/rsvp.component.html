@@ -1,4 +1,4 @@
-<main>
+<main *ngIf="(invitationLoading$ | async) === false; else loading">
   <div class="guests">
     <p *ngFor="let guest of guests$ | async">
       {{ guest.firstName }} {{ guest.lastName }}
@@ -19,7 +19,7 @@
 
   <img class="divider-line" src="../../assets/line.svg" alt="divider">
 
-  <form class="rsvp-form" [formGroup]="rsvpForm" (ngSubmit)="submitRsvp()">
+  <form id="rsvp-form" class="rsvp-form" [formGroup]="rsvpForm" (ngSubmit)="submitRsvp()" *ngIf="(rsvpAlreadySubmitted$ | async) === true && (editRsvp$ | async); else submitted">
     <p class="rsvp-text bold">Please fill out the form below to RSVP for each guest.</p>
 
     <ng-container formArrayName="guests">
@@ -52,9 +52,9 @@
     </ng-container>
 
   
-    <p class="rsvp-text bold">Any special accomodations to note?</p>
+    <p class="rsvp-text bold no-margin">Any special accomodations to note?</p>
 
-    <p class="rsvp-text">Dietary restrictions, allergies, etc...</p>
+    <p class="rsvp-text no-margin">Dietary restrictions, allergies, etc...</p>
 
     <textarea formControlName="notes" class="notes-textarea"></textarea>
 
@@ -70,9 +70,46 @@
 
   <img class="divider-line" src="../../assets/line-flipped.svg" alt="divider">
 
-  <h2 class="thank-you-text">Thank you!</h2>
+  <ng-template #submitted>
+    <h2 class="thank-you-text">Thank you!</h2>
+  
+    <p class="registry-text">Your RSVP has been submitted with the following information: </p>
+  
+    <div class="rsvp-confirmation">
+      <div *ngFor="let guest of guests$ | async" class="guest-container">
+        <div class="name-container">
+          <p>{{ guest.firstName }} {{ guest.lastName }}</p> 
+        </div>
+  
+        <div class="rsvp-container">
+          <div class="rsvp-details" [ngSwitch]="guest.rsvp">
+            <p *ngSwitchCase="true">
+              <span>Will attend </span>
+              <span *ngIf="guest.rsvpCeremony && guest.rsvpReception">ceremony & reception.</span>
+              <span *ngIf="guest.rsvpCeremony && !guest.rsvpReception">ceremony only.</span>
+              <span *ngIf="!guest!.rsvpCeremony && guest.rsvpReception">reception only.</span>
+            </p>
+            <p *ngSwitchCase="false">Unable to attend.</p>
+          </div>
+        </div>
+      </div>
 
-  <img class="flourish" src="../../assets/flourish.svg" alt="flourish decoration">
+      <div class="note-container">
+        <p class="note-title">Note: </p>
+        <p class="note-text">{{ (invitation$ | async)?.notes || 'N/A'  }}</p>
+      </div>
+    </div>
+  
+    <p class="registry-text"><a routerLink="#rsvp-form" (click)="toggleEditRsvp()">Click here</a> to edit your invitation by February 1, 2023.</p>
 
-  <p class="registry-text">For gift ideas, please check out <a target="_blank" href="https://www.google.com">our registry</a>.</p>
+    <img class="flourish" src="../../assets/flourish.svg" alt="flourish decoration">
+  
+    <p class="registry-text">For gift ideas, please check out <a target="_blank" href="https://www.myregistry.com/giftlist/gavynandjacqueline">our registry</a>.</p>
+  </ng-template>
 </main>
+
+<ng-template #loading>
+  <main class="loading-skeleton">
+    <mat-spinner></mat-spinner>
+  </main>
+</ng-template>  

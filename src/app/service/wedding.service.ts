@@ -1,7 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LoginErrorComponent } from '../login-error/login-error.component';
 import { Invitation } from '../models/models';
 
 @Injectable({
@@ -10,17 +12,12 @@ import { Invitation } from '../models/models';
 export class WeddingService {
 
   userCode$: BehaviorSubject<string>;
-  invitations$: BehaviorSubject<Invitation | undefined>;
+  invitation$: BehaviorSubject<Invitation | undefined>;
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private dialog: MatDialog) { 
     
     this.userCode$ = new BehaviorSubject<string>(sessionStorage.getItem("userCode") ?? '');
-    const invitationFromStorage = sessionStorage.getItem('invitation');
-    this.invitations$ = new BehaviorSubject<Invitation | undefined>(invitationFromStorage !== null ? JSON.parse(invitationFromStorage) : undefined);
-
-    this.invitations$.asObservable().subscribe((invitation) => {
-      sessionStorage.setItem("invitation", JSON.stringify(invitation));
-    });
+    this.invitation$ = new BehaviorSubject<Invitation | undefined>(undefined);
 
     this.userCode$.asObservable().subscribe((userCode) => {
       sessionStorage.setItem("userCode", userCode);
@@ -31,18 +28,25 @@ export class WeddingService {
     const username = userCode.split(":")?.[0];
 
     return this.http
-      .get<Invitation>(`${environment.apiUrl}/invitations/${username}`).pipe(
+      .get<Invitation>(`${environment.apiUrl}/invitations/${username}`)
+      .pipe(
+        catchError((err) => {
+          this.dialog.open(LoginErrorComponent, {
+            width: '400px',
+          });
+          throw err;
+        }),
         tap((res) => {
           this.userCode$.next(userCode);
-          this.invitations$.next(res);
-        }),
+          this.invitation$.next(res);
+        })
       );
   }
 
   updateInvitationRsvps(invitationToUpdate: Invitation): Observable<Invitation> {
     return this.http.put<Invitation>(`${environment.apiUrl}/invitations`, invitationToUpdate).pipe(
       tap((res) => {
-        this.invitations$.next(res);
+        this.invitation$.next(res);
       }),
     );
   }

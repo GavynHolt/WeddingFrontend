@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-error',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginErrorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialogRef: MatDialogRef<LoginErrorComponent>, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goHome(): void {
+    this.dialogRef.close();
+    this.router.navigate(['./'])
   }
 
 }

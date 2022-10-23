@@ -12,4 +12,5 @@ export interface Invitation {
   userCode: string;
   guests: Guest[];
   notes: string;
+  lastModified: string;
 };

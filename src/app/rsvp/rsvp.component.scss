@@ -1,3 +1,11 @@
+.loading-skeleton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
 .rsvp-form {
   max-width: 800px;
   margin: 0 auto;
@@ -13,6 +21,7 @@
     background-color: white;
     font-family: 'Lexend', sans-serif;
     font-size: 16px;
+    margin: 20px 0;
     &:focus,
     &:hover {
       --box-shadow: none;
@@ -43,7 +52,7 @@
   display: flex;
   width: 100%;
   max-width: 400px;
-  margin: 16px 0;
+  margin-bottom: 16px;
   padding: 8px 0;
   @media (max-width: 480px) {
     display: unset;
@@ -82,4 +91,39 @@
 
 .loading-spinner {
   margin: 0 auto;
+}
+
+.rsvp-confirmation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+  .guest-container {
+    padding: 0;
+  }
+  .name-container {
+    flex: 1 1 150px;
+  }
+  .rsvp-container {
+    flex: 1 1 300px;
+  }
+  p {
+    margin: 0
+  }
+  .rsvp-container {
+    .rsvp-details {
+      margin-left: 0;
+
+    }
+  }
+  .note-container { 
+    max-width: 400px;
+  }
+  .note-title {
+    font-weight: bold;
+    text-align: center;
+  }
+  .note-text {
+    text-align: center;
+  }
 }

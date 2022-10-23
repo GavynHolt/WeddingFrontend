@@ -41,11 +41,14 @@ export class WelcomeComponent implements OnInit {
     this.weddingService
       .getInvitationByUserCode(userCode)
       .pipe(
-        delay(5000),
+        // catchError((err) => {
+        //   this.dialog.open(LoginErrorComponent, {
+        //     width: '400px',
+        //   });
+        //   this.loginLoading.next(false);
+        //   throw err;
+        // })
         catchError((err) => {
-          this.dialog.open(LoginErrorComponent, {
-            width: '400px',
-          });
           this.loginLoading.next(false);
           throw err;
         })
