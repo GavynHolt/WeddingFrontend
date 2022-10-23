@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, catchError, combineLatest, delay, filter, map, mergeMap, Observable, tap, withLatestFrom } from 'rxjs';
-import { LoginErrorComponent } from '../login-error/login-error.component';
 import { Guest, Invitation } from '../models/models';
 import { WeddingService } from '../service/wedding.service';
 import { RsvpErrorComponent } from './rsvp-error/rsvp-error.component';
