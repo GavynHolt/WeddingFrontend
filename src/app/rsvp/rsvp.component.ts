@@ -42,12 +42,6 @@ export class RsvpComponent implements OnInit {
       mergeMap(([, userCode]) => {
         this.invitationLoading.next(true);
         return this.weddingService.getInvitationByUserCode(userCode).pipe(
-          // catchError((err) => {
-          //   this.dialog.open(LoginErrorComponent, {
-          //     width: '400px',
-          //   });
-          //   throw err;
-          // }),
           tap(() => {
             this.invitationLoading.next(false);
           })
