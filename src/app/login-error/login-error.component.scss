@@ -1,6 +1,17 @@
+.dialog-title {
+  text-align: center;
+  font-family: tenez, 'Georgia', serif;
+  color: #175038;
+  font-size: 30px;
+  font-weight: 600;
+}
+
 .dialog-content {
-  margin: 32px 0;
+  margin: 8px 0;
   padding: 0;
+  p {
+    text-align: center;
+  }
 }
 
 .dialog-actions {
@@ -8,17 +19,17 @@
 }
 
 .close-button {
-  max-width: 120px;
+  max-width: 100px;
   border-radius: 999px;
-  background-color: black;
+  background-color: #175038;
   border: none;
-  height: 50px;
-  padding-top: 4px;
+  height: 40px;
+  padding-top: 6px;
   padding-bottom: 8px;
   margin-bottom: 0;
-  font-weight: 600;
+  font-weight: 500;
   font-family: 'Lexend', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   &:focus,
   &:hover {
     --box-shadow: none;

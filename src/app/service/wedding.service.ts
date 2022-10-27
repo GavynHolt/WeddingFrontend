@@ -33,6 +33,7 @@ export class WeddingService {
         catchError((err) => {
           this.dialog.open(LoginErrorComponent, {
             width: '400px',
+            panelClass: 'custom-dialog-container',
           });
           throw err;
         }),

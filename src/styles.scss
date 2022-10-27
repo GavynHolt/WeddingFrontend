@@ -108,6 +108,7 @@ section {
     font-size: 14px;
     &:focus,
     &:hover {
+      --box-shadow: none;
       background-color: #BC9D51;
     }
   }
@@ -192,5 +193,9 @@ a {
     color: black;
     text-decoration: none;
   }
+}
+
+.custom-dialog-container .mat-dialog-container {
+  padding: 28px 40px 40px;
 }
 
