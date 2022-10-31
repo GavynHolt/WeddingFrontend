@@ -1,10 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-@import url("@picocss/pico/css/pico.min.css");
+// @import url("@picocss/pico/css/pico.min.css");
 
 // Pico CSS overrides
 [data-theme=light],
 :root:not([data-theme=dark]) {
   --color: black;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body { 

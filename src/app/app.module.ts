@@ -8,12 +8,19 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { RsvpComponent } from './rsvp/rsvp.component';
 import { MapComponent } from './map/map.component';
 import { LoginErrorComponent } from './login-error/login-error.component';
+import { AdminComponent } from './admin/admin.component';
+import { MatButtonModule } from '@angular/material/button';
+import { AddInvitationComponent } from './admin/add-invitation/add-invitation.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 
 @NgModule({
@@ -23,6 +30,8 @@ import { LoginErrorComponent } from './login-error/login-error.component';
     RsvpComponent,
     MapComponent,
     LoginErrorComponent,
+    AdminComponent,
+    AddInvitationComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +45,11 @@ import { LoginErrorComponent } from './login-error/login-error.component';
     HttpClientJsonpModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatTableModule,
+    MatSortModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

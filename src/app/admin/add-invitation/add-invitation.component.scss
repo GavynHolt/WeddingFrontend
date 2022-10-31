@@ -1,0 +1,20 @@
+.guest-form-group {
+  display: flex;
+  align-items: center;
+  .first-name {
+    margin-right: 16px;
+    min-width: 0;
+  }
+  .last-name {
+    min-width: 0;
+  }
+  .delete-button {
+    padding: 0;
+    min-width: 32px;
+    margin-left: 16px;
+  }
+}
+
+.dialog-actions {
+  justify-content: space-between;
+}

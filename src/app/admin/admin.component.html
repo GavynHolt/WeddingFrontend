@@ -1,0 +1,54 @@
+<main>
+  <div class="admin-menu">
+    <h1>Admin Panel</h1>
+    <button mat-raised-button (click)="openAddInvitationDialog()" color="accent">Add Invitation</button>
+  </div>
+
+  <mat-table
+    matSort
+    matSortDisableClear
+    [dataSource]="dataSource"
+    matSortActive="firstName"
+    matSortDirection="asc"
+    class="invitations-admin-table"
+  >
+    <!-- First Name -->
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
+      <mat-cell *matCellDef="let guest">{{ guest.firstName }}</mat-cell>
+      <mat-footer-cell *matFooterCellDef><span class="footer-title">Total Guests Invited:&nbsp;{{ dataSource.data.length }}</span></mat-footer-cell>
+    </ng-container>
+
+    <!-- Last Name -->
+    <ng-container matColumnDef="lastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
+      <mat-cell *matCellDef="let guest">{{ guest.lastName }}</mat-cell>
+      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rsvp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>RSVP</mat-header-cell>
+      <mat-cell *matCellDef="let guest">
+        <ng-container [ngSwitch]="guest.rsvp">
+          <div *ngSwitchCase="true">
+            <span>Yes</span>
+            <span *ngIf="guest.rsvpCeremony && !guest.rsvpReception"> - ceremony only</span>
+            <span *ngIf="!guest.rsvpCeremony && guest.rsvpReception"> - reception only</span>
+          </div>
+          <div *ngSwitchCase="false">No</div>
+          <div *ngSwitchCase="null || undefined">Awaiting Reply</div>
+        </ng-container>
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef>
+        <span class="footer-title">Ceremony:&nbsp;{{ rsvpCeremony$ | async }}</span>
+        <span class="footer-title">Reception:&nbsp;{{ rsvpReception$ | async }}</span>
+        <span class="footer-title">No:&nbsp;{{ rsvpNo$ | async }}</span>
+        <span class="footer-title">Awaiting Reply:&nbsp;{{ rsvpAwaitingReply$ | async }}</span>
+      </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+  </mat-table>
+</main>

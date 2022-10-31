@@ -1,0 +1,35 @@
+main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  h1 {
+    color: #175038;
+  }
+}
+
+.admin-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invitations-admin-table {
+  width: 100%;
+  flex: 1 1 auto;
+  margin-bottom: 24px;
+  border: 1px solid #BC9D51;
+  position: relative;
+
+  .footer-title {
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  .mat-footer-row {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px solid #BC9D51;
+  }
+}
