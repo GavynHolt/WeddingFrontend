@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { BehaviorSubject, catchError, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { LoginErrorComponent } from '../login-error/login-error.component';
 import { Guest, Invitation } from '../models/models';
@@ -11,23 +11,54 @@ import { Guest, Invitation } from '../models/models';
 })
 export class WeddingService {
 
+  adminToken$: BehaviorSubject<string>;
   userCode$: BehaviorSubject<string>;
   invitation$: BehaviorSubject<Invitation | undefined>;
   weddingRsvps$: BehaviorSubject<Guest[] | undefined>;
 
   constructor(private http: HttpClient, private dialog: MatDialog) { 
     
+    this.adminToken$ = new BehaviorSubject<string>(sessionStorage.getItem("adminToken") ?? '');
     this.userCode$ = new BehaviorSubject<string>(sessionStorage.getItem("userCode") ?? '');
     this.invitation$ = new BehaviorSubject<Invitation | undefined>(undefined);
     this.weddingRsvps$ = new BehaviorSubject<Guest[] | undefined>(undefined);
+
+    this.adminToken$.asObservable().subscribe((adminToken) => {
+      sessionStorage.setItem('adminToken', adminToken);
+    });
 
     this.userCode$.asObservable().subscribe((userCode) => {
       sessionStorage.setItem("userCode", userCode);
     });
   }
 
+  adminLogin(username: string, password: string): Observable<any> {
+    const credentials = {
+      username,
+      password,
+    };
+    return this.http.post<boolean>(`${environment.apiUrl}/login`, credentials).pipe(
+      tap((isValid) => { 
+        if (isValid) {
+          this.adminToken$.next(btoa(username + ':' + password));
+        } else {
+          throw new Error('Authentication failed.');
+        }
+      }),
+      catchError((error: Error) => {
+        alert(error.message);
+        this.adminToken$.next('');
+        return of(error);
+      })
+    )
+  }
+
   getAllGuestRsvps(): Observable<Guest[]> {
-    return this.http.get<Guest[]>(`${environment.apiUrl}/guests/rsvps`).pipe(
+    const headers = new HttpHeaders({ 
+        'Authorization': 'Basic ' + this.adminToken$.value
+    });
+
+    return this.http.get<Guest[]>(`${environment.apiUrl}/admin/rsvps`, { headers }).pipe(
       tap((rsvps) => this.weddingRsvps$.next(rsvps)),
     );
   }
@@ -53,7 +84,10 @@ export class WeddingService {
   }
 
   addInvitation(invitationToAdd: Invitation): Observable<Invitation> {
-    return this.http.post<Invitation>(`${environment.apiUrl}/admin/invitations`, invitationToAdd);
+    const headers = new HttpHeaders({
+      Authorization: 'Basic ' + this.adminToken$.value,
+    });
+    return this.http.post<Invitation>(`${environment.apiUrl}/admin/invitations`, invitationToAdd, { headers });
   }
 
   updateInvitationRsvps(invitationToUpdate: Invitation): Observable<Invitation> {

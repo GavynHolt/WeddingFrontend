@@ -6,8 +6,7 @@ import { WeddingService } from '../service/wedding.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-
+export class AdminGuard implements CanActivate {
   constructor(
     private weddingService: WeddingService,
     private router: Router,
@@ -16,14 +15,14 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return this.weddingService.userCode$.pipe(
+    return this.weddingService.adminToken$.pipe(
       mergeMap((token) => {
-        if (!!token) {
+        if (token) {
           return of(true);
-        } 
-        this.router.navigate(['']);
+        }
+        this.router.navigate(['admin/login']);
         return of(false);
-      }),
+      })
     );
   }
 }

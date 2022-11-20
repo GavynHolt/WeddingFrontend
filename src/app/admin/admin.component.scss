@@ -21,6 +21,12 @@ main {
   border: 1px solid #BC9D51;
   position: relative;
 
+  .footer-container {
+    @media (max-width: 800px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
   .footer-title {
     font-weight: bold;
     margin-right: 8px;

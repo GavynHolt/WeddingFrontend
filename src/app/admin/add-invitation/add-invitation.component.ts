@@ -36,8 +36,6 @@ export class AddInvitationComponent {
   }
 
   submitInvitation(): void {
-    console.log(this.invitationForm.value);
-
     this.weddingService.addInvitation(this.invitationForm.value).subscribe();
     this.dialogRef.close();
   }

@@ -23,7 +23,12 @@
     <ng-container matColumnDef="lastName">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
       <mat-cell *matCellDef="let guest">{{ guest.lastName }}</mat-cell>
-      <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+      <mat-footer-cell *matFooterCellDef>
+        <div class="footer-container">
+          <span class="footer-title">Ceremony:&nbsp;{{ rsvpCeremony$ | async }}</span>
+          <span class="footer-title">Reception:&nbsp;{{ rsvpReception$ | async }}</span>
+        </div>
+      </mat-footer-cell>
     </ng-container>
 
     <ng-container matColumnDef="rsvp">
@@ -40,10 +45,10 @@
         </ng-container>
       </mat-cell>
       <mat-footer-cell *matFooterCellDef>
-        <span class="footer-title">Ceremony:&nbsp;{{ rsvpCeremony$ | async }}</span>
-        <span class="footer-title">Reception:&nbsp;{{ rsvpReception$ | async }}</span>
-        <span class="footer-title">No:&nbsp;{{ rsvpNo$ | async }}</span>
-        <span class="footer-title">Awaiting Reply:&nbsp;{{ rsvpAwaitingReply$ | async }}</span>
+        <div class="footer-container">
+          <span class="footer-title">No:&nbsp;{{ rsvpNo$ | async }}</span>
+          <span class="footer-title">Awaiting Reply:&nbsp;{{ rsvpAwaitingReply$ | async }}</span>
+        </div>
       </mat-footer-cell>
     </ng-container>
 

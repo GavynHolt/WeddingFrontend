@@ -126,7 +126,6 @@ export class RsvpComponent implements OnInit {
   submitRsvp(): void {
     this.rsvpSubmitLoading.next(true);
     const invitationToUpdate: Invitation = this.rsvpForm.value;
-    console.log(invitationToUpdate);
     this.weddingService
       .updateInvitationRsvps(invitationToUpdate)
       .pipe(

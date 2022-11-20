@@ -21,6 +21,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { AddInvitationComponent } from './admin/add-invitation/add-invitation.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { LoginComponent } from './admin/login/login.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MatInputModule } from '@angular/material/input';
     LoginErrorComponent,
     AdminComponent,
     AddInvitationComponent,
+    LoginComponent,
   ],
   imports: [
     CommonModule,
