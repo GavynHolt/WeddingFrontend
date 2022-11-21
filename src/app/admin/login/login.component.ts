@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    const username: string = this.loginForm.controls['username'].value;
+    const username: string = (this.loginForm.controls['username'].value as String).toLowerCase().trim();
     const password: string = this.loginForm.controls['password'].value;
     this.weddingService.adminLogin(username, password).subscribe(() => {
       this.router.navigate(['admin']);
