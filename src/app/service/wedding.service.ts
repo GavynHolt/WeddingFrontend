@@ -34,7 +34,7 @@ export class WeddingService {
 
   adminLogin(username: string, password: string): Observable<any> {
     const credentials = {
-      username,
+      username: username.toLowerCase().trim(),
       password,
     };
     return this.http.post<boolean>(`${environment.apiUrl}/login`, credentials).pipe(
