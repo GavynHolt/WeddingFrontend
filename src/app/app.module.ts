@@ -10,6 +10,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -52,6 +54,8 @@ import { LoginComponent } from './admin/login/login.component';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatRadioModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

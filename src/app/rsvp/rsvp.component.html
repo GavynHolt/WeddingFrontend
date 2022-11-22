@@ -28,26 +28,14 @@
           <p>{{ guest.get('firstName')?.value }} {{ guest.get('lastName')?.value }}</p> 
         </div>
 
-        <div class="rsvp-container">
-          <label for="rsvp-yes">
-            <input type="radio" id="rsvp-yes" [value]="true" formControlName="rsvp" />
-            Yes, I'll be there.
-          </label>
+        <mat-radio-group class="rsvp-container" formControlName="rsvp" (change)="changeRsvpSelection($event, i)">
+          <mat-radio-button color="primary" [value]="true">Yes, I'll be there.</mat-radio-button> 
           <div class="rsvp-details">
-            <label for="rsvp-ceremony">
-              <input type="checkbox" id="rsvp-ceremony" name="rsvp-yes-details" formControlName="rsvpCeremony">
-              at the ceremony
-            </label>
-            <label for="rsvp-reception">
-              <input type="checkbox" id="rsvp-reception" name="rsvp-yes-details" formControlName="rsvpReception">
-              at the reception
-            </label>
+            <mat-checkbox color="primary" formControlName="rsvpCeremony" (change)="validateRsvpSubselection(i)">at the ceremony</mat-checkbox>
+            <mat-checkbox color="primary" formControlName="rsvpReception" (change)="validateRsvpSubselection(i)">at the reception</mat-checkbox>
           </div>
-          <label for="rsvp-no">
-            <input type="radio" id="rsvp-no" [value]="false" formControlName="rsvp" />
-            Sorry, can't make it.
-          </label>
-        </div>
+          <mat-radio-button color="primary" [value]="false">Sorry, can't make it.</mat-radio-button>
+        </mat-radio-group>
       </div>
     </ng-container>
 

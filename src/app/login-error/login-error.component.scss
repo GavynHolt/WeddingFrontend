@@ -17,22 +17,3 @@
 .dialog-actions {
   justify-content: center;
 }
-
-.close-button {
-  max-width: 100px;
-  border-radius: 999px;
-  background-color: #175038;
-  border: none;
-  height: 40px;
-  padding-top: 6px;
-  padding-bottom: 8px;
-  margin-bottom: 0;
-  font-weight: 500;
-  font-family: 'Lexend', sans-serif;
-  font-size: 14px;
-  &:focus,
-  &:hover {
-    --box-shadow: none;
-    background-color: #BC9D51;
-  }
-}
