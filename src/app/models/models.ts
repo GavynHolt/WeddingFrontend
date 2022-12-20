@@ -12,6 +12,7 @@ export interface Invitation {
   id: number;
   userCode: string;
   guests: Guest[];
-  notes: string;
+  email?: string;
+  notes?: string;
   lastModified: string;
 };

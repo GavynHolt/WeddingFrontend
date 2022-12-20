@@ -31,6 +31,7 @@ export class RsvpComponent {
   ) {
     this.rsvpForm = this.fb.group({
       guests: this.fb.array([]),
+      email: new FormControl<string>('', Validators.email),
       notes: new FormControl<string>(''),
     });
 
@@ -84,6 +85,7 @@ export class RsvpComponent {
               })
             )
           ),
+          email: new FormControl<string>(invitation?.email || '', { validators: Validators.email, updateOn: 'blur' }),
           notes: new FormControl<string>(invitation?.notes || ''),
         });
       });

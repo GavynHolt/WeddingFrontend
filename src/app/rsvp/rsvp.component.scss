@@ -50,19 +50,19 @@
 
 .guest-container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   max-width: 400px;
   margin-bottom: 16px;
   padding: 8px 0;
   @media (max-width: 480px) {
-    display: unset;
     width: auto;
     max-width: 300px;
     margin-right: auto;
     margin-left: auto;
   } 
   .name-container {
-    flex: 1 1 150px;
     p {
       font-weight: bold;
       margin: 0;
@@ -72,11 +72,12 @@
     }
   }
   .rsvp-container {
-    flex: 1 1 200px;
+    &.top-margin {
+      margin-top: 8px;
+    }
   }
   label {
     font-size: 16px;
-
   }
 }
 
@@ -87,6 +88,35 @@
 
 .rsvp-details {
   margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.email-container {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Lexend', sans-serif;
+  margin-bottom: 32px;
+  .email-input {
+    border: 2px solid black;
+    border-radius: 0;
+    background-color: white;
+    padding-left: 10px;
+    padding-top: 4px;
+    padding-bottom: 8px;
+    height: 50px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    &:focus,
+    &:hover {
+      --box-shadow: none;
+      border: 2px solid #BC9D51;
+      outline: none;
+    }
+  }
+  .email-error {
+    color: red;
+  }
 }
 
 .loading-spinner {
@@ -101,12 +131,12 @@
   .guest-container {
     padding: 0;
   }
-  .name-container {
-    flex: 1 1 150px;
-  }
-  .rsvp-container {
-    flex: 1 1 300px;
-  }
+  // .name-container {
+  //   flex: 1 1 150px;
+  // }
+  // .rsvp-container {
+  //   flex: 1 1 300px;
+  // }
   p {
     margin: 0
   }

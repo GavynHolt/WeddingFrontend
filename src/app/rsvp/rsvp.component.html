@@ -28,7 +28,7 @@
           <p>{{ guest.get('firstName')?.value }} {{ guest.get('lastName')?.value }}</p> 
         </div>
 
-        <mat-radio-group class="rsvp-container" formControlName="rsvp" (change)="changeRsvpSelection($event, i)">
+        <mat-radio-group class="rsvp-container top-margin" formControlName="rsvp" (change)="changeRsvpSelection($event, i)">
           <mat-radio-button color="primary" [value]="true">Yes, I'll be there.</mat-radio-button> 
           <div class="rsvp-details">
             <mat-checkbox color="primary" formControlName="rsvpCeremony" (change)="validateRsvpSubselection(i)">at the ceremony</mat-checkbox>
@@ -39,6 +39,11 @@
       </div>
     </ng-container>
 
+    <div class="email-container">
+      <label for="email" class="rsvp-text bold">Email</label>
+      <input class="email-input" id="email" type="text" formControlName="email">
+      <p *ngIf="rsvpForm.controls['email'].hasError('email')" class="email-error">Please enter a valid email.</p>
+    </div>
   
     <p class="rsvp-text bold no-margin">Any special accomodations to note?</p>
 
