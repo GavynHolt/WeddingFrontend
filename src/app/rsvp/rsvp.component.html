@@ -20,7 +20,7 @@
   <img class="divider-line" src="../../assets/line.svg" alt="divider">
 
   <form class="rsvp-form" [formGroup]="rsvpForm" (ngSubmit)="submitRsvp()" *ngIf="(rsvpAlreadySubmitted$ | async) === false || (editRsvp$ | async); else submitted">
-    <p class="rsvp-text bold">Please fill out the form below to RSVP for each guest by February 1, 2023.</p>
+    <p class="rsvp-text bold">Please fill out the form below to RSVP for each guest by April 1, 2023.</p>
 
     <ng-container formArrayName="guests">
       <div *ngFor="let guest of rsvpFormGuests; let i = index" [formGroupName]="i" class="guest-container" >
@@ -88,12 +88,17 @@
       </div>
 
       <div class="note-container">
+        <p class="note-title">Email</p>
+        <p class="note-text">{{ (invitation$ | async)?.email || 'N/A' }}</p>
+      </div>
+
+      <div class="note-container">
         <p class="note-title">Note: </p>
         <p class="note-text">{{ (invitation$ | async)?.notes || 'N/A'  }}</p>
       </div>
     </div>
   
-    <p class="registry-text"><a routerLink="./" (click)="toggleEditRsvp()">Click here</a> to edit your invitation by February 1, 2023.</p>
+    <p class="registry-text"><a routerLink="./" (click)="toggleEditRsvp()">Click here</a> to edit your invitation by April 1, 2023.</p>
 
     <img class="flourish" src="../../assets/flourish.svg" alt="flourish decoration">
   

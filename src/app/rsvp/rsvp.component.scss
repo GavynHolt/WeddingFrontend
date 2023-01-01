@@ -21,6 +21,7 @@
     background-color: white;
     font-family: 'Lexend', sans-serif;
     font-size: 16px;
+    padding: 10px;
     margin: 20px 0;
     &:focus,
     &:hover {
@@ -131,12 +132,6 @@
   .guest-container {
     padding: 0;
   }
-  // .name-container {
-  //   flex: 1 1 150px;
-  // }
-  // .rsvp-container {
-  //   flex: 1 1 300px;
-  // }
   p {
     margin: 0
   }
@@ -148,6 +143,7 @@
   }
   .note-container { 
     max-width: 400px;
+    margin-bottom: 16px;
   }
   .note-title {
     font-weight: bold;

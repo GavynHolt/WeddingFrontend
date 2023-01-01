@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { MapInfoWindow, MapMarker } from '@angular/google-maps';
 
 @Component({
   selector: 'app-map',
@@ -10,6 +11,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
+  @ViewChild('receptionInfoWindow') receptionInfoWindow!: MapInfoWindow;
+  @ViewChild('ceremonyInfoWindow') ceremonyInfoWindow!: MapInfoWindow;
   apiLoaded$: Observable<boolean>;
 
   homeMarker: google.maps.LatLngLiteral = { lat: 43.6242808, lng: -79.5034614 };
@@ -34,13 +37,13 @@ export class MapComponent implements OnInit {
       .pipe(
         tap(() => {
           this.ceremonyMarkerIcon = {
-            url: '/assets/reception.svg',
+            url: '/assets/ceremony.svg',
             size: new google.maps.Size(50, 50),
             scaledSize: new google.maps.Size(50, 50),
             anchor: new google.maps.Point(30, 30),
           };
           this.receptionMarkerIcon = {
-            url: '/assets/ceremony.svg',
+            url: '/assets/reception.svg',
             size: new google.maps.Size(50, 50),
             scaledSize: new google.maps.Size(50, 50),
             anchor: new google.maps.Point(30, 30),
@@ -58,5 +61,20 @@ export class MapComponent implements OnInit {
     mapBounds.extend(this.homeMarker);
     mapBounds.extend(this.restaurantMarker);
     map.fitBounds(mapBounds);
+  }
+
+  openReceptionInfoWindow(marker: MapMarker) {
+    this.ceremonyInfoWindow.close();
+    this.receptionInfoWindow.open(marker);
+  }
+
+  openCeremonyInfoWindow(marker: MapMarker) {
+    this.receptionInfoWindow.close();
+    this.ceremonyInfoWindow.open(marker);
+  }
+
+  closeInfoWindows() {
+    this.ceremonyInfoWindow.close();
+    this.receptionInfoWindow.close();
   }
 }

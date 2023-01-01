@@ -1,12 +1,26 @@
 <div *ngIf="apiLoaded$ | async" class="map-container">
-  <google-map width="100%" height="500px" [options]="mapOptions" (mapInitialized)="onMapReady($event)">
+  <google-map width="100%" height="500px" [options]="mapOptions" (mapInitialized)="onMapReady($event)" (mapClick)="closeInfoWindows()">
     <map-marker
+      #receptionMarker="mapMarker"
       [position]="restaurantMarker"
-      [icon]="ceremonyMarkerIcon"
-    ></map-marker>
-    <map-marker
-      [position]="homeMarker"
       [icon]="receptionMarkerIcon"
+      (mapClick)="openReceptionInfoWindow(receptionMarker)"
     ></map-marker>
+    <map-info-window #receptionInfoWindow="mapInfoWindow">
+      <h2>Reception</h2>
+      <h3>Positicino Ristorante</h3>
+    </map-info-window>
+    <map-marker
+      #ceremonyMarker="mapMarker"
+      [position]="homeMarker"
+      [icon]="ceremonyMarkerIcon"
+      (mapClick)="openCeremonyInfoWindow(ceremonyMarker)"
+    ></map-marker>
+    <map-info-window #ceremonyInfoWindow="mapInfoWindow">
+      <h2>Ceremony</h2>
+      <h3>Our home backyard, at: </h3>
+      <p>42 Dayton Ave </p>
+      <p>Etobicoke, ON, M8Z 3L7</p>
+    </map-info-window>
   </google-map>
 </div>
