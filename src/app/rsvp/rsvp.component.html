@@ -29,12 +29,12 @@
         </div>
 
         <mat-radio-group class="rsvp-container top-margin" formControlName="rsvp" (change)="changeRsvpSelection($event, i)">
-          <mat-radio-button color="primary" [value]="true">Yes, I'll be there.</mat-radio-button> 
+          <mat-radio-button color="primary" [value]="true" class="rsvp-label">Yes, I'll be there.</mat-radio-button> 
           <div class="rsvp-details">
-            <mat-checkbox color="primary" formControlName="rsvpCeremony" (change)="validateRsvpSubselection(i)">at the ceremony</mat-checkbox>
-            <mat-checkbox color="primary" formControlName="rsvpReception" (change)="validateRsvpSubselection(i)">at the reception</mat-checkbox>
+            <mat-checkbox color="primary" formControlName="rsvpCeremony" (change)="validateRsvpSubselection(i)"  class="rsvp-label">at the ceremony</mat-checkbox>
+            <mat-checkbox color="primary" formControlName="rsvpReception" (change)="validateRsvpSubselection(i)"  class="rsvp-label">at the reception</mat-checkbox>
           </div>
-          <mat-radio-button color="primary" [value]="false">Sorry, can't make it.</mat-radio-button>
+          <mat-radio-button color="primary" [value]="false" class="rsvp-label">Sorry, can't make it.</mat-radio-button>
         </mat-radio-group>
       </div>
     </ng-container>
@@ -49,7 +49,7 @@
 
     <p class="rsvp-text no-margin">Dietary restrictions, allergies, etc...</p>
 
-    <textarea formControlName="notes" class="notes-textarea"></textarea>
+    <textarea formControlName="notes" class="notes-textarea" cols="3"></textarea>
 
     <button type="submit" [disabled]="rsvpForm.invalid || (rsvpSubmitLoading$ | async)">
       <mat-spinner
