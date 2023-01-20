@@ -31,6 +31,7 @@
       </mat-footer-cell>
     </ng-container>
 
+    <!-- RSVP Response -->
     <ng-container matColumnDef="rsvp">
       <mat-header-cell *matHeaderCellDef mat-sort-header>RSVP</mat-header-cell>
       <mat-cell *matCellDef="let guest">
@@ -52,8 +53,10 @@
       </mat-footer-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <div class="row-container">
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </div>
+    <mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></mat-footer-row>
   </mat-table>
 </main>

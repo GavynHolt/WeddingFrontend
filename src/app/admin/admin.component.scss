@@ -1,8 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  max-height: 100vh;
+}
+
 main {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   padding: 0;
+  overflow-y: hidden;
   h1 {
     color: #175038;
   }
@@ -20,6 +27,7 @@ main {
   margin-bottom: 24px;
   border: 1px solid #BC9D51;
   position: relative;
+  overflow-y: auto;
 
   .footer-container {
     @media (max-width: 800px) {
@@ -32,10 +40,6 @@ main {
     margin-right: 8px;
   }
   .mat-footer-row {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     border-top: 1px solid #BC9D51;
   }
 }
