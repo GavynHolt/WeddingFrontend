@@ -2,6 +2,15 @@
   border: 1px solid #BC9D51;
 }
 
+p {
+  font-size: 15px;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
 google-map {
   width: 100%;
 }
